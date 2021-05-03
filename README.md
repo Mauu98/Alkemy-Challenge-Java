@@ -1,5 +1,7 @@
 # Alkemy-Challenge-Java
 
+# NOTA || link principal => localhost:8080/  
+
 CHALLENGE JAVA - ALKEMY
 
 LABS
