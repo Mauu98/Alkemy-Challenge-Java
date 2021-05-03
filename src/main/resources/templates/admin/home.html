@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <style>
+.center {
+	text-align: center;
+	border: 0px solid green;
+}
+</style>
+    <meta charset="UTF-8">
+    <title>Admin Home</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+          crossorigin="anonymous">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <p class="text-light" sec:authorize="isAuthenticated()">
+            User Logged: <span sec:authentication="name" class="text-success"></span>
+            | Roles: <span sec:authentication="principal.authorities"
+                           class="text-danger"></span>
+        </p>
+        <ul class="navbar-nav ml-auto">
+            <form id="logoutForm" th:action="@{/logout}" method="post">
+                <button class="btn btn-danger"  style="float:right";
+                        onclick="document.getElementById('logoutForm').submit();"
+                        type="submit">Logout</button>
+            </form>
+
+        </ul>
+    </nav>
+</header>
+<div class="alert alert-info" th:text="${info}" th:if="${info}"></div>
+<br>
+<div>
+    <a class="btn btn-primary btn-xs"  th:text="'Subject'"
+       th:href="@{/subjects}"></a>
+    <a class="btn btn-success btn-xs"  th:text="'Professor'"
+       th:href="@{/professors}"></a>
+</div>
+
+</body>
+</html>

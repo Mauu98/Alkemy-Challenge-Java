@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Subjects List</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+          crossorigin="anonymous">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <p class="text-light" sec:authorize="isAuthenticated()">
+            User Logged: <span sec:authentication="name" class="text-success"></span>
+            | Roles: <span sec:authentication="principal.authorities"
+                           class="text-danger"></span>
+        </p>
+        <ul class="navbar-nav ml-auto">
+            <form id="logoutForm" th:action="@{/logout}" method="post" c>
+                <button class="btn btn-danger"  style="float:right";
+                        onclick="document.getElementById('logoutForm').submit();"
+                        type="submit">Logout</button>
+            </form>
+        </ul>
+    </nav>
+</header>
+<div class="alert alert-success" th:text="${success}" th:if="${success}"></div>
+<div class="alert alert-danger" th:text="${error}" th:if="${error}"></div>
+<h2 class="text-center text-primary">List of Subjects</h2>
+<h4 class="card-title">
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/form-subject}" class="btn btn-primary btn-xs">New Subject</a>
+    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}" class="btn btn-success btn-xs">Return to Main Menu</a>
+</h4>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th sec:authorize="hasRole('ROLE_ADMIN')">ID</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')">NAME</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')">PROFESSOR</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')">SCHEDULE</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')">QUOTAS</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')">EDIT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="subject: ${subjects}">
+        <td th:text="${subject.id}"></td>
+        <td th:text="${subject.name}"></td>
+        <td th:text="${subject.professor.name} + ' ' + ${subject.professor.last_name}"></td>
+        <td th:text="${subject.schedule}"></td>
+        <td th:text="${subject.maximum_quota}"></td>
+        <td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary btn-xs" th:href="@{/editSubject/} + ${subject.id}" th:text="'EDIT'"></a></td>
+
+
+
+    </tr>
+    </tbody>
+</table>
+<footer>
+    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery-ui.min.js}"></script>
+</footer>
+</body>
+</html>
