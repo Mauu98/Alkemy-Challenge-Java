@@ -27,7 +27,7 @@ public class StudentRepositoryTest {
         Student student = new Student();
         student.setName("Mauricio");
         student.setLast_name("Pino");
-        student.setDni("415216406");
+        student.setDni("98234234");
         student.setFile("1104236");
 
         Student saveStudent = repository.save(student);
@@ -40,7 +40,7 @@ public class StudentRepositoryTest {
 
     @Test
     public void findStudentByDni(){
-        String dni = "41521640";
+        String dni = "98234234";
         Student student = repository.findByDni(dni);
 
         assertThat(student).isNotNull();
