@@ -65,7 +65,7 @@ Diseño responsive, moderno, intuitivo
 Puede ser algo minimalista, sencillo, pero funcional
 Se puede usar cualquier framework CSS: Bootstrap,
 Materialize, Bulma
-● Conocimientos generales de C#
+● Conocimientos generales de JAVA
 ● Conocimientos básicos / intermedios de Jquery
 ● Correcto uso de los controllers
 ● Correcto uso de los modelos, relaciones, atributos
